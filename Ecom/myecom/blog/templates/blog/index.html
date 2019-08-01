@@ -1,0 +1,45 @@
+{% extends 'blog/basic.html' %}
+{% block body %}
+
+<!--
+{% load static %}
+<a href="{%static 'blog/mystatic.txt' %}">Click me</a>
+<a href="{%static '‪D:\python\Django_ex\Ecom\myecom\blog\static\blog\image.jpeg' %}">Click me</a>
+-->
+<div class="container">
+	
+
+	<div class="row mb-2 my-4">
+	{% for i in myposts %}
+	
+		
+		
+	    
+	    <div class="col-md-6">
+	      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+	        <div class="col p-4 d-flex flex-column position-static">
+	          <strong class="d-inline-block mb-2 text-primary">{{i.title}}</strong>
+	          <h3 class="mb-0">{{i.head0}}</h3>
+	          <div class="mb-1 text-muted">{{i.pub_date}}</div>
+	          <p class="card-text mb-auto">{{i.chead0|slice:"0:30"}}...</p>
+	          <a href="blogpost/{{i.post_id}}" class="stretched-link">Continue reading</a>
+	        </div>
+	        <div class="col-auto d-none d-lg-block">
+	          <img  src='/media/{{i.thubnail}}'class="bd-placeholder-img" width="200" height="250" aria-label="Placeholder: Thumbnail">
+	        </div>
+	      </div>
+    	</div>
+    	{% if forloop.counter|divisibleby:2 %}
+    </div><div class="row mb-2 my-4">
+    	{% endif %}
+    	
+
+		
+	{% endfor %}
+	      
+  
+  
+</div>
+
+{% endblock %}
+

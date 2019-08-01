@@ -1,0 +1,69 @@
+{% extends 'shop/basic.html' %}
+{% block title%}Contact Us{% endblock %}
+{% block body%}
+<div class="container">
+<h3>Contact Us Regarding Any Queries</h3>
+<form class="my-5" action="/shop/contact/" onsubmit="return submitcontact()" method="post"> {% csrf_token %}
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Your Name" required>
+        <label id="lblname"style="color: red" ; visibility: "hidden" ></label>
+    </div>
+    <div class="form-group">
+        <label for="email" >Email address</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+        <label id="lblemail"style="color: red" ; visibility: "hidden" ></label>
+    </div>
+    <div class="form-group">
+        <label for="phone" >Number</label>
+        <input type="tel" class="form-control"  id="phone" name="phone" required>
+        <label id="lblphone" style="color: red" ; visibility: "hidden" ></label>
+    </div>
+    <div class="form-group">
+        <label for="desc">Descreption</label>
+        <textarea class="form-control" name="desc" id="desc" rows="3" required></textarea>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    function submitcontact() {
+        var name = document.getElementById("name");
+        
+        var mob = document.getElementById("phone").value;
+        var regphone = /^[7-9]\d{9}$/;
+        
+        var ema = document.getElementById("email").value;
+        var regemail = /^([a-zA-Z0-9\.-]+)@([a-z0-9-]+).([a-z]{1,20})(\.[a-z]{1,20})$/;
+        if( name.value.trim() == "" )
+        {
+            document.getElementById("lblname").innerHTML = "InValid";
+            document.getElementById("lblname").style.visibility = "visible";
+            document.getElementById("lblname").style.color = "red";   
+            return false;
+        }
+        else if (regphone.test(mob)==false) {
+            document.getElementById("lblphone").innerHTML = "InValid";
+            document.getElementById("lblphone").style.visibility = "visible";
+            document.getElementById("lblphone").style.color = "red";
+            return false;
+        }
+        else if (regemail.test(ema)==false) {
+            document.getElementById("lblemail").innerHTML = "InValid";
+            document.getElementById("lblemail").style.visibility = "visible";
+            document.getElementById("lblemail").style.color = "red";
+            return false;
+        }
+        else
+        {
+            alert("Thanks for submiting this form");
+            return true;
+        }
+    }
+</script>
+{% endblock %}
